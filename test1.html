@@ -17,45 +17,35 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      width: 120vw;
-      height: 120vh;
-      object-fit: cover;
-      transform: translate(-50%, -50%) scale(0.1);
-      opacity: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain; /* full image visible at end */
+      transform: translate(-50%, -50%) scale(1);
       z-index: 9999;
+      animation: scareSequence 1.8s ease-in-out forwards;
     }
 
-    /* Zoom-in */
-    @keyframes zoomIn {
-      0% {
-        transform: translate(-50%, -50%) scale(0.1);
-        opacity: 0;
-      }
-      100% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 1;
-      }
-    }
+    @keyframes scareSequence {
+      /* Cycle 1 */
+      0%   { transform: translate(-50%, -50%) scale(1); }
+      10%  { transform: translate(-50%, -50%) scale(1.4); }
+      20%  { transform: translate(-50%, -50%) scale(1); }
 
-    /* Screen shake */
-    @keyframes shake {
-      0% { transform: translate(-50%, -50%) translate(0, 0) scale(1.1); }
-      10% { transform: translate(-50%, -50%) translate(-20px, 10px) scale(1.1); }
-      20% { transform: translate(-50%, -50%) translate(20px, -10px) scale(1.1); }
-      30% { transform: translate(-50%, -50%) translate(-15px, -15px) scale(1.1); }
-      40% { transform: translate(-50%, -50%) translate(15px, 15px) scale(1.1); }
-      50% { transform: translate(-50%, -50%) translate(-10px, 10px) scale(1.1); }
-      60% { transform: translate(-50%, -50%) translate(10px, -10px) scale(1.1); }
-      70% { transform: translate(-50%, -50%) translate(-5px, 5px) scale(1.1); }
-      80% { transform: translate(-50%, -50%) translate(5px, -5px) scale(1.1); }
-      90% { transform: translate(-50%, -50%) translate(-2px, 2px) scale(1.1); }
-      100% { transform: translate(-50%, -50%) translate(0, 0) scale(1.1); }
-    }
+      /* Cycle 2 */
+      30%  { transform: translate(-50%, -50%) scale(1.5); }
+      40%  { transform: translate(-50%, -50%) scale(1); }
 
-    .active {
-      animation:
-        zoomIn 0.15s ease-out forwards,
-        shake 0.4s linear 0.15s;
+      /* Cycle 3 */
+      50%  { transform: translate(-50%, -50%) scale(1.6); }
+      60%  { transform: translate(-50%, -50%) scale(1); }
+
+      /* Shake baked into zoom */
+      70%  { transform: translate(-48%, -52%) scale(1.05); }
+      80%  { transform: translate(-52%, -48%) scale(1.03); }
+      90%  { transform: translate(-49%, -51%) scale(1.01); }
+
+      /* Final normal state */
+      100% { transform: translate(-50%, -50%) scale(1); }
     }
   </style>
 </head>
@@ -66,12 +56,6 @@
     src="https://i.imgflip.com/9xuopm.png"
     alt="jumpscare"
   >
-
-  <script>
-    setTimeout(() => {
-      document.getElementById("jumpscare").classList.add("active");
-    }, 1000); // 1 second delay
-  </script>
 
 </body>
 </html>
